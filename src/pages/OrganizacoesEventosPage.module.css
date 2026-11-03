@@ -1,0 +1,69 @@
+.lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 18px;
+}
+
+.item + .item {
+  border-top: 1px solid rgba(13, 17, 23, 0.08);
+}
+
+/* Bloco de data do evento: dia grande, mês abreviado */
+.data {
+  width: 56px;
+  padding: 6px 0;
+  border-radius: 14px;
+  text-align: center;
+  color: #fff;
+  background: var(--gradiente-marca);
+}
+
+.dia {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.mes {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.inicial {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 800;
+  color: var(--azul);
+  background: rgba(37, 89, 168, 0.1);
+}
+
+.titulo {
+  font-weight: 700;
+}
+
+.detalhe {
+  color: #5b6675;
+  font-size: var(--mantine-font-size-sm);
+}
+
+@media (max-width: 36em) {
+  .item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .acao {
+    grid-column: 1 / -1;
+  }
+}

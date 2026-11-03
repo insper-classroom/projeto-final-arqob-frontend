@@ -1,0 +1,60 @@
+:root {
+  /* Paleta da marca Blackboard: noite, branco e o degradê azul, verde-azulado e verde */
+  --noite: #0d1117;
+  --noite-2: #141b26;
+  --claro: #f4f6f9;
+  --tinta: #0d1117;
+  --azul: #2559a8;
+  --petroleo: #1c8682;
+  --verde: #2cb04a;
+  --lima: #80c041;
+  --gradiente-marca: linear-gradient(45deg, #2559a8 0%, #227494 38%, #1c8682 55%, #2cb04a 80%, #80c041 100%);
+
+  /* Curva de mola: arranca rápido e assenta devagar, como objeto com massa */
+  --ease-mola: cubic-bezier(0.32, 0.72, 0, 1);
+  /* Sombra ambiente bem difusa e de baixa opacidade */
+  --sombra-suave: 0 1px 2px rgba(13, 17, 23, 0.04), 0 12px 32px -12px rgba(13, 17, 23, 0.16);
+}
+
+body {
+  margin: 0;
+  background: var(--claro);
+  color: var(--tinta);
+}
+
+/* Entrada de página: um único movimento ao trocar de tela */
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Transições dos componentes do Mantine usam a mesma curva de mola */
+.mantine-Button-root,
+.mantine-Anchor-root,
+.mantine-Input-input {
+  transition:
+    background-color 300ms var(--ease-mola),
+    border-color 300ms var(--ease-mola),
+    color 300ms var(--ease-mola),
+    box-shadow 300ms var(--ease-mola),
+    transform 300ms var(--ease-mola);
+}
+
+.mantine-Button-root:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

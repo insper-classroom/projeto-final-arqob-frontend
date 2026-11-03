@@ -1,0 +1,199 @@
+.pagina {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  color: var(--claro);
+  /* Fundo escuro com manchas de luz nas cores do degradê da marca */
+  background:
+    radial-gradient(42rem 32rem at 12% 8%, rgba(37, 89, 168, 0.28), transparent 70%),
+    radial-gradient(36rem 28rem at 88% 92%, rgba(44, 176, 74, 0.12), transparent 70%),
+    radial-gradient(30rem 30rem at 70% 20%, rgba(28, 134, 130, 0.35), transparent 70%),
+    var(--noite);
+}
+
+/* Grão sutil: fixo e sem capturar cliques */
+.pagina::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grade {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  min-height: 100dvh;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 7vw, 6rem) clamp(16px, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+
+/* Entrada orquestrada: cada peça sobe com um pequeno atraso em relação à anterior */
+.revelar {
+  opacity: 0;
+  animation: revelar 900ms var(--ease-mola) forwards;
+  animation-delay: var(--atraso, 0ms);
+}
+
+@keyframes revelar {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+.apresentacao {
+  container-type: inline-size;
+}
+
+.selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(244, 246, 249, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(244, 246, 249, 0.14);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 246, 249, 0.78);
+}
+
+.ponto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gradiente-marca);
+}
+
+.marca {
+  margin: 1.5rem 0 0;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 800;
+  /* Proporcional à largura da coluna, para a palavra nunca invadir o cartão */
+  font-size: clamp(3rem, 16.5cqi, 8rem);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+}
+
+/* Traço no degradê da marca, desenhado da esquerda para a direita */
+.traco {
+  width: clamp(4rem, 9vw, 7rem);
+  height: 6px;
+  margin-top: 1.5rem;
+  border-radius: 3px;
+  background: var(--gradiente-marca);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: tracar 900ms var(--ease-mola) 450ms forwards;
+}
+
+@keyframes tracar {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.descricao {
+  max-width: 30rem;
+  margin: 2rem 0 0;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: rgba(244, 246, 249, 0.78);
+}
+
+/* Cartão do formulário: bandeja translúcida com a placa clara encaixada */
+.casca {
+  --raio: 2rem;
+  --folga: 8px;
+  padding: var(--folga);
+  border-radius: var(--raio);
+  background: rgba(244, 246, 249, 0.06);
+  box-shadow:
+    inset 0 0 0 1px rgba(244, 246, 249, 0.12),
+    0 40px 80px -40px rgba(0, 0, 0, 0.45);
+}
+
+.nucleo {
+  border-radius: calc(var(--raio) - var(--folga));
+  background: var(--claro);
+  color: var(--tinta);
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.titulo {
+  margin: 0;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitulo {
+  margin: 6px 0 0;
+  color: #5b6675;
+}
+
+/* Botão com a seta encaixada num círculo próprio */
+.entrar {
+  height: 52px;
+  padding-inline: 24px 6px;
+}
+
+.seta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(244, 246, 249, 0.14);
+  transition: transform 500ms var(--ease-mola);
+}
+
+.entrar:hover .seta {
+  transform: translate(3px, -1px) scale(1.06);
+}
+
+@media (max-width: 48em) {
+  .grade {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 2.5rem;
+    padding: 2.5rem 16px;
+  }
+
+  .descricao {
+    margin-top: 1.25rem;
+  }
+
+  .casca {
+    --raio: 1.5rem;
+    --folga: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revelar,
+  .traco {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

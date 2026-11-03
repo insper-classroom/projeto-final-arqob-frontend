@@ -1,0 +1,32 @@
+/* Moldura dupla: uma bandeja fina por fora e a superfície de trabalho encaixada dentro */
+.casca {
+  --raio: 1.25rem;
+  --folga: 6px;
+  padding: var(--folga);
+  border-radius: var(--raio);
+  background: rgba(13, 17, 23, 0.045);
+  box-shadow: inset 0 0 0 1px rgba(13, 17, 23, 0.07);
+}
+
+.nucleo {
+  border-radius: calc(var(--raio) - var(--folga));
+  background: #fff;
+  box-shadow:
+    var(--sombra-suave),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
+
+/* Tabelas dentro da superfície: respiro lateral e sem borda na última linha */
+.nucleo :global(.mantine-Table-table) {
+  --table-border-color: rgba(13, 17, 23, 0.08);
+}
+
+.nucleo :global(.mantine-Table-th),
+.nucleo :global(.mantine-Table-td) {
+  padding-inline: 16px;
+}
+
+.nucleo :global(.mantine-Table-tbody .mantine-Table-tr:last-of-type) {
+  border-bottom: none;
+}
